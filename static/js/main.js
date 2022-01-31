@@ -155,12 +155,13 @@ function HappyNewYear(){
     $('h2').text('HAPPY NEW YEAR')
     $('h2').css('top', '20%')
     $('.wrap').append(`
-    <video class="video" hidden id ="video" id="jscii-element-video" width="150" height="112" loop autoplay>
-        <source src="/video/main.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+    <video class="video" hidden id ="video" id="jscii-element-video" loop autoplay>
+        <source src="/static/video/main.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
         Your browser does not support video
 	</video>
-    <pre class="video" id="ascii-video"></pre>
-    <div id="play" onclick="playVideo()">CLICK ME</div>
+    <pre hidden class="video" id="ascii-video"></pre>
+    <div id="play" onclick="playVideo()"></div>
+    <div id="change" onclick="changeVideo()"></div>
     `)
     Ascii()
     var videoJscii = new Jscii({
@@ -170,8 +171,8 @@ function HappyNewYear(){
     videoJscii.play()
 }
 
-let lunarNewYear = new Date('Feb 1 2022 00:00:00:00 GMT+0700 (Indochina Time)')
-let afterLunarNewYear = new Date('Feb 1 2022 00:00:00:10 GMT+0700 (Indochina Time)')
+let lunarNewYear = new Date('Jan 31 2022 13:37:00:00 GMT+0700 (Indochina Time)')
+let afterLunarNewYear = new Date('Jan 31 2022 13:37:00:10 GMT+0700 (Indochina Time)')
 if (new Date() >= lunarNewYear) {
     HappyNewYear()
 }
@@ -182,10 +183,51 @@ setInterval(() => {
     }
 }, 0)
 
+function checkVideo() {
+	let media = document.querySelector('#video')
+
+	if(media.paused) {
+		$('#play').text('Play')
+    } else {
+		$('#play').text('Pause')
+	}
+}
+
 function playVideo() {
-    let media = document.querySelector('#video')
-        
+	let media = document.querySelector('#video')
+    
     if(media.paused) {
         media.play()
-    }
+		checkVideo()
+    } else {
+		media.pause()
+		checkVideo()
+	}
 }
+
+function checkTypeVideo() {
+	if(document.querySelector('#ascii-video').getAttribute('hidden')) {
+		$('#change').text('Normal Video')
+	} else {
+		$('#change').text('Ascii Video')
+	}
+}
+
+function changeVideo() {
+	console.log(document.querySelector('#ascii-video').getAttribute('hidden'))
+	if(!document.querySelector('#ascii-video').hasAttribute('hidden')) {
+		document.querySelector('#ascii-video').setAttribute('hidden', '')
+		document.querySelector('#video').removeAttribute('hidden')
+		checkTypeVideo()
+	} else {
+		document.querySelector('#video').setAttribute('hidden', '')
+		document.querySelector('#ascii-video').removeAttribute('hidden')
+		checkTypeVideo()
+	}
+}
+
+checkVideo()
+checkTypeVideo()
+
+let media = document.querySelector('#video')
+media.removeAttribute('hidden')

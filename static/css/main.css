@@ -191,15 +191,38 @@ ul li {
 	padding: 0 0px;
 }
 
+#video {
+	height: 637px;
+	width: 1317.44px;
+}
+
 #ascii-video {
 	/* width: 100%; */
 }
 
 #play {
+	user-select: none;
 	padding:0;
 	position:absolute;
 	top: 90%;
 	left: 65%;
+	transform: translate(-20%, -50%);
+	margin-top: 32px;
+	margin-bottom: 0;
+	padding: 0 0px;
+	color: #000;
+	background-color: #fff;
+	padding: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#change {
+	user-select: none;
+	padding:0;
+	position:absolute;
+	top: 90%;
+	right: 23%;
 	transform: translate(-20%, -50%);
 	margin-top: 32px;
 	margin-bottom: 0;
